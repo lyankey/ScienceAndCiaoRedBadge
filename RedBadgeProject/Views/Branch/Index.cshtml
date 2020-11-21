@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ScienceAndCiao.Data.Branch>
+    @using ScienceAndCiao.Services
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Branch</h2>
+
+@Html.Partial("_CreateButtonPartial")
+
+<table class="table table-condensed table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(m => m.BranchName)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m=>item.BranchName)
+            </td>
+            <td>
+                @Html.Partial("_TableButtonPartial", new IndivButtonPartial { BranchId = item.BranchId });
+            </td>
+         
+        </tr>
+    }
+</table>

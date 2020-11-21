@@ -1,0 +1,42 @@
+﻿@model ScienceAndCiao.Services.IndivButtonPartial
+    @using ScienceAndCiao.Services
+
+<td style="width:400px;">
+    <div class="btn-group" role="group"></div>
+    @Html.Partial("_IndivButtonPartial",
+   new IndivButtonPartial
+   {
+       Action = "Edit",
+       ButtonType = "btn-primary",
+       Glyph = "pencil",
+       Text = "Edit",
+       BranchId = Model.BranchId,
+       KitId = Model.KitId,
+       CustomerId = Model.CustomerId,
+       MembershipTypeId = Model.MembershipTypeId,
+   })
+     @Html.Partial("_IndivButtonPartial",
+   new IndivButtonPartial
+   {
+       Action = "Details",
+       ButtonType = "btn-success",
+       Glyph = "list",
+       Text = "Details",
+       BranchId = Model.BranchId,
+       KitId = Model.KitId,
+       CustomerId = Model.CustomerId,
+       MembershipTypeId = Model.MembershipTypeId,
+   })
+    @Html.Partial("_IndivButtonPartial",
+    new IndivButtonPartial
+    {
+        Action = "Delete",
+        ButtonType = "btn-danger",
+        Glyph = "trash",
+        Text = "Delete",
+        BranchId = Model.BranchId,
+        KitId = Model.KitId,
+        CustomerId = Model.CustomerId,
+        MembershipTypeId = Model.MembershipTypeId,
+    })
+</td>
