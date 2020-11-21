@@ -10,7 +10,7 @@
 @Html.Partial("_CreateButtonPartial")
 
 <table class="table table-condensed table-hover">
-    <tr>
+    <tr class="table-header">
         <th>
             @Html.DisplayNameFor(m => m.BranchName)
         </th>
@@ -25,7 +25,7 @@
                 @Html.DisplayFor(m=>item.BranchName)
             </td>
             <td>
-                @Html.Partial("_TableButtonPartial", new IndivButtonPartial { BranchId = item.BranchId });
+                @Html.Partial("_TableButtonPartial", new IndivButtonPartial { BranchId = item.BranchId })
             </td>
          
         </tr>

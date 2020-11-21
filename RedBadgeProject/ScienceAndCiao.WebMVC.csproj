@@ -241,6 +241,10 @@
     <Content Include="Views\Shared\_CreateButtonPartial.cshtml" />
     <Content Include="Views\Shared\_IndivButtonPartial.cshtml" />
     <Content Include="Views\Shared\_TableButtonPartial.cshtml" />
+    <Content Include="Views\Branch\Details.cshtml" />
+    <Content Include="Views\Shared\_EditButtonPartial.cshtml" />
+    <Content Include="Views\Branch\Edit.cshtml" />
+    <Content Include="Views\Branch\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
