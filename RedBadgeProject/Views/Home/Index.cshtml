@@ -4,8 +4,10 @@
     ViewBag.Title = "Home Page";
 }
 
-
-<br />
+@* push the search values using a get and not a post - this form searches all my thumbnail - by title becase that's what I put on my ThumbnailListItem *@
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <br />
 <div class="row">
     <div class="pull-right" style="padding-right:15px;">
         <button type="submit" value="Search" class="btn btn-sm btn-primary">
@@ -20,9 +22,10 @@
 </div>
 
 <br />
-
+}
 <div class="row">
     @foreach (var area in Model)
     {
-@Html.Partial("_ThumbnailAreaPartial", area);}
+        @Html.Partial("_ThumbnailAreaPartial", area);
+    }
 </div>

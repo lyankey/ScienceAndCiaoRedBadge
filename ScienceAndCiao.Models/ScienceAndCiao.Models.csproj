@@ -69,6 +69,8 @@
     <Compile Include="Rental\RentalDetail.cs" />
     <Compile Include="Rental\RentalEdit.cs" />
     <Compile Include="Rental\RentalListItem.cs" />
+    <Compile Include="UserAgeRange.cs" />
+    <Compile Include="User\StaticDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

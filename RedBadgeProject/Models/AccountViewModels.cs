@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using ScienceAndCiao.Data;
+using ScienceAndCiao.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RedBadgeProject.Models
@@ -79,6 +82,37 @@ namespace RedBadgeProject.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public bool? Disable { get; set; }
+
+        public ICollection<MembershipType> MembershipTypes { get; set; }
+
+
+        [Required]
+        public int MembershipTypeId { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
+
+        [Required]
+        //used a custom extension method UserDateRangeAttribute to make sure birthdates are within a range
+        [UserAgeRange("01/01/1900")]
+        [Display(Name = "Birth Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM dd yyyy}")]
+
+        public DateTime BirthDate { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

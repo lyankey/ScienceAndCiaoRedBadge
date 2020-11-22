@@ -16,8 +16,8 @@ namespace ScienceAndCiao.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public bool Disable { get; set; }
-        public string MemberShipTypeId { get; set; }
+        public int Disable { get; set; }
+        public int MembershipTypeId { get; set; }
         public bool IsSubscribedToEmails { get; set; }
 
 

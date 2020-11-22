@@ -12,6 +12,7 @@ namespace RedBadgeProject.Controllers
     public class HomeController : Controller
     {
         public ActionResult Index(string search = null)
+            //the search string will be passed if there is value, to the index action - see the partial view for the thumbnail, and also need search in the thumbnail extension 
         {
             var thumbnails = new List<KitThumbnail>().GetBookThumbnail(ApplicationDbContext.Create(), search);
             //get the thumbnails you want and then divide by 4

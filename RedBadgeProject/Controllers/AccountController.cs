@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RedBadgeProject.Models;
 using ScienceAndCiao.Data;
+using ScienceAndCiao.Models.User;
 
 namespace RedBadgeProject.Controllers
 {
@@ -137,10 +139,19 @@ namespace RedBadgeProject.Controllers
 
         //
         // GET: /Account/Register
+        //change to pass in view model for a new user
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            using (var db = ApplicationDbContext.Create())
+            {
+                RegisterViewModel newUser = new RegisterViewModel
+                {
+                    MembershipTypes = db.MembershipTypes.ToList(),
+                    BirthDate = DateTime.Now
+                };
+                return View(newUser);
+            }
         }
 
         //
@@ -152,10 +163,44 @@ namespace RedBadgeProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    BirthDate = model.BirthDate,
+                    LastName = model.LastName,
+                    FirstName = model.FirstName,
+                    MembershipTypeId = model.MembershipTypeId,
+                    Disable = 0,
+                    //Disable = False
+                };
+
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    using (var db = ApplicationDbContext.Create())
+                    {
+                        //create roles and role manager
+                        model.MembershipTypes = db.MembershipTypes.ToList();
+                        var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                        var roleManager = new RoleManager<IdentityRole>(roleStore);
+                        var memebership = model.MembershipTypes.SingleOrDefault(m => m.Id == model.MembershipTypeId).Name.ToString();
+
+                        //admin will have admin text within
+                        if (memebership.ToLower().Contains("admin"))
+                        {
+                            //For  Admin assocates this user object to the admin role
+                            await roleManager.CreateAsync(new IdentityRole(StaticDetails.AdminUserRole));
+                            await UserManager.AddToRoleAsync(user.Id, StaticDetails.AdminUserRole);
+                        }
+                        else
+                        {
+                            //For Customer - if not an admin then associated to enduser role, then the sign in manager kicks in below
+                            await roleManager.CreateAsync(new IdentityRole(StaticDetails.EndUserRole));
+                            await UserManager.AddToRoleAsync(user.Id, StaticDetails.EndUserRole);
+                        }
+                    }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

@@ -27,9 +27,10 @@ namespace ScienceAndCiao.Models.Kit
                                   Link = "/KitDetail/Index/" + k.KitId,
                               }).ToList();
                 //converting the output to a list and storing it in the kitthumbnails
+                //searching the thumbnails from the home page
                 if (search != null)
                 {
-                    return thumbnails.Where(t => t.Title.ToLower().Contains(search.ToLower())).OrderBy(t => t.Title);
+                    return thumbnails.Where(s => s.Title.ToLower().Contains(search.ToLower())).OrderBy(s => s.Title);
                 }
             }
             catch (Exception ex)
