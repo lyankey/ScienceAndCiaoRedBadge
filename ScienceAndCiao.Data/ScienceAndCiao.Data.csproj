@@ -74,6 +74,14 @@
     <Compile Include="Migrations\202011221815233_AddUserFields.Designer.cs">
       <DependentUpon>202011221815233_AddUserFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011222050305_addedUserRoles.cs" />
+    <Compile Include="Migrations\202011222050305_addedUserRoles.Designer.cs">
+      <DependentUpon>202011222050305_addedUserRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011222058594_prayingthisfixedusers.cs" />
+    <Compile Include="Migrations\202011222058594_prayingthisfixedusers.Designer.cs">
+      <DependentUpon>202011222058594_prayingthisfixedusers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rental.cs" />
@@ -94,6 +102,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011221815233_AddUserFields.resx">
       <DependentUpon>202011221815233_AddUserFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011222050305_addedUserRoles.resx">
+      <DependentUpon>202011222050305_addedUserRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011222058594_prayingthisfixedusers.resx">
+      <DependentUpon>202011222058594_prayingthisfixedusers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

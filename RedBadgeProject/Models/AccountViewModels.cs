@@ -99,9 +99,7 @@ namespace RedBadgeProject.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
-        [Display(Name = "Phone")]
-        public string Phone { get; set; }
+      
 
         [Required]
         //used a custom extension method UserDateRangeAttribute to make sure birthdates are within a range

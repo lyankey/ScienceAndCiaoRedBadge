@@ -171,8 +171,8 @@ namespace RedBadgeProject.Controllers
                     LastName = model.LastName,
                     FirstName = model.FirstName,
                     MembershipTypeId = model.MembershipTypeId,
-                    Disable = 0,
-                    //Disable = False
+                    Disable = false,
+       
                 };
 
 
