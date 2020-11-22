@@ -57,9 +57,18 @@
     <Compile Include="Branch.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Kit.cs" />
+    <Compile Include="MembershipType.cs" />
     <Compile Include="Migrations\202011220149381_GettingReadyToSeed.cs" />
     <Compile Include="Migrations\202011220149381_GettingReadyToSeed.Designer.cs">
       <DependentUpon>202011220149381_GettingReadyToSeed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011221727176_AddMembershipType.cs" />
+    <Compile Include="Migrations\202011221727176_AddMembershipType.Designer.cs">
+      <DependentUpon>202011221727176_AddMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011221728153_SeedMembershipTypeDatabase.cs" />
+    <Compile Include="Migrations\202011221728153_SeedMembershipTypeDatabase.Designer.cs">
+      <DependentUpon>202011221728153_SeedMembershipTypeDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +81,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011220149381_GettingReadyToSeed.resx">
       <DependentUpon>202011220149381_GettingReadyToSeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011221727176_AddMembershipType.resx">
+      <DependentUpon>202011221727176_AddMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011221728153_SeedMembershipTypeDatabase.resx">
+      <DependentUpon>202011221728153_SeedMembershipTypeDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
