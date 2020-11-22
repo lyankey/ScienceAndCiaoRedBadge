@@ -24,6 +24,7 @@ namespace RedBadgeProject
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-theme.css",
+                      "~/Content/thumbnail.css",
                       "~/Content/site.css"));
         }
     }

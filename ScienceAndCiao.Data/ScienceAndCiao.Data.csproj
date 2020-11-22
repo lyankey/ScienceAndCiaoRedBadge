@@ -70,6 +70,10 @@
     <Compile Include="Migrations\202011221728153_SeedMembershipTypeDatabase.Designer.cs">
       <DependentUpon>202011221728153_SeedMembershipTypeDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011221815233_AddUserFields.cs" />
+    <Compile Include="Migrations\202011221815233_AddUserFields.Designer.cs">
+      <DependentUpon>202011221815233_AddUserFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rental.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011221728153_SeedMembershipTypeDatabase.resx">
       <DependentUpon>202011221728153_SeedMembershipTypeDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011221815233_AddUserFields.resx">
+      <DependentUpon>202011221815233_AddUserFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

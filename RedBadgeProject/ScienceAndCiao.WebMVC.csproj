@@ -177,6 +177,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\KitThumbnailViewModel.cs" />
     <Compile Include="Models\KitViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Views\MembershipType\Details.cshtml" />
     <Content Include="Views\MembershipType\Edit.cshtml" />
     <Content Include="Views\MembershipType\Index.cshtml" />
+    <Content Include="Views\Shared\_ThumbnailAreaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
