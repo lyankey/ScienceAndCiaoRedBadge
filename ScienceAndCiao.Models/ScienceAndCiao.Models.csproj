@@ -63,6 +63,7 @@
     <Compile Include="Kit\KitEdit.cs" />
     <Compile Include="Kit\KitListItem.cs" />
     <Compile Include="Kit\KitThumbnail.cs" />
+    <Compile Include="Kit\KitThumbnailListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rental\RentalCreate.cs" />
     <Compile Include="Rental\RentalDetail.cs" />

@@ -65,6 +65,8 @@ namespace RedBadgeProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        //need to make validate input false or get error here
         //don't like this because it's a magic string you'd have to remember to change. 
         //public ActionResult Create([Bind(Include = "KitId,Title,Description,Grade,ImageUrl,Price,DateAdded,BranchId,PublicationDate,LengthInMinutes")] Kit kit)
         //not getting a kit object so instead we are getting the kit view model, then turning that into an object - manually converting a viewmodel object into an object of a class

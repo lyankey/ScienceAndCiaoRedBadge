@@ -197,6 +197,7 @@
     <Content Include="Content\Images\7.jpg" />
     <Content Include="Content\Images\8.jpg" />
     <Content Include="Content\Images\9.jpg" />
+    <Content Include="Content\thumbnail.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
