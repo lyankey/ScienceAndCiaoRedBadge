@@ -89,7 +89,7 @@ namespace RedBadgeProject.Models
 
 
         [Required]
-        public int MembershipTypeId { get; set; }
+        public int? MembershipTypeId { get; set; }
 
         [Required]
         [Display(Name = "First Name")]
