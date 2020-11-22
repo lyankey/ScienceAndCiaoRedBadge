@@ -1,5 +1,4 @@
-﻿using RedBadgeProject.Data;
-using ScienceAndCiao.Data;
+﻿using ScienceAndCiao.Data;
 using ScienceAndCiao.Models.Kit;
 using System;
 using System.Collections.Generic;

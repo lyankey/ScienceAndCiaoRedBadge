@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using RedBadgeProject.Data;
 using RedBadgeProject.Models;
 using ScienceAndCiao.Data;
 
@@ -40,7 +39,7 @@ namespace RedBadgeProject.Controllers
             var model = new KitViewModel
             {
                 Kit = kit,
-                Branches = db.Branches.ToList()
+                Branch = db.Branches.ToList()
             };
             //passing my viewmodel in instead of the kit obj
             return View(model);
@@ -55,7 +54,7 @@ namespace RedBadgeProject.Controllers
             var model = new KitViewModel
             //Branches is the list in kitviewmodel
             {
-                Branches = branch
+                Branch = branch
             };
             //passing in my viewmodel instead of default kit obj
             return View(model);
@@ -92,7 +91,7 @@ namespace RedBadgeProject.Controllers
                 return RedirectToAction("Index");
             }
             //get it from the database and pass the kit viewmodel into the view
-            kvmodel.Branches = db.Branches.ToList();
+            kvmodel.Branch = db.Branches.ToList();
             return View(kvmodel);
             //don't like the viewbag as much as the viewmodel - you can associate the viewmodel strictly with the view
             //ViewBag.BranchId = new SelectList(db.Branches, "BranchId", "BranchName", kit.BranchId);
@@ -117,7 +116,7 @@ namespace RedBadgeProject.Controllers
             var model = new KitViewModel
             {
                 Kit = kit,
-                Branches = db.Branches.ToList()
+                Branch = db.Branches.ToList()
             };
            
             return View(model);
@@ -155,7 +154,7 @@ namespace RedBadgeProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            kvmodel.Branches = db.Branches.ToList();
+            kvmodel.Branch = db.Branches.ToList();
             return View(kvmodel);
         }
 
@@ -174,7 +173,7 @@ namespace RedBadgeProject.Controllers
             var model = new KitViewModel
             {
                 Kit = kit,
-                Branches = db.Branches.ToList()
+                Branch = db.Branches.ToList()
             };
             return View(model);
         }

@@ -35,7 +35,7 @@ namespace ScienceAndCiao.Data
         [Required]
         [DisplayFormat(DataFormatString = "{0: MMM dd yyy}")]
         public DateTime? DateAdded { get; set; }
-        [Required]
+  
         public int BranchId { get; set; }
         public Branch Branch { get; set; }
         [Required]

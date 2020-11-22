@@ -8,7 +8,7 @@ namespace RedBadgeProject.Models
 {
     public class KitViewModel
     {
-        public IEnumerable<Branch> Branches { get; set; }
+        public IEnumerable<Branch> Branch { get; set; }
         public Kit Kit { get; set; }
     }
 }

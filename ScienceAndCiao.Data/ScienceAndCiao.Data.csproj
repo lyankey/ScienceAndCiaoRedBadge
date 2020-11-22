@@ -57,12 +57,22 @@
     <Compile Include="Branch.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Kit.cs" />
+    <Compile Include="Migrations\202011220149381_GettingReadyToSeed.cs" />
+    <Compile Include="Migrations\202011220149381_GettingReadyToSeed.Designer.cs">
+      <DependentUpon>202011220149381_GettingReadyToSeed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rental.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011220149381_GettingReadyToSeed.resx">
+      <DependentUpon>202011220149381_GettingReadyToSeed.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
