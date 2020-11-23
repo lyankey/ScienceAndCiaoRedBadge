@@ -8,9 +8,20 @@ namespace RedBadgeProject.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
+        //this fixes error after facebook login confirmation, so our data matches what's needed - bc facebook passes less than what we ask for
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required]
+        [Display(Name = "Birth Date dd mm yyyy")]
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; }
+        public bool? Disable { get; set; }
+
+        public ICollection<MembershipType> MembershipTypes { get; set; }
+
+        [Required]
+        public int MembershipTypeId { get; set; }
     }
 
     public class ExternalLoginListViewModel

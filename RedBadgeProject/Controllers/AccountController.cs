@@ -365,6 +365,7 @@ namespace RedBadgeProject.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
+        //for this to work, must add application db context and then the info we need to pass in for registration
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -374,7 +375,7 @@ namespace RedBadgeProject.Controllers
                 return RedirectToAction("Login");
             }
 
-            // Sign in the user with this external login provider if the user already has a login
+            // Sign in the user with this external login provider if the user already has a login - put dbcontext in using statement to dispose
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
@@ -389,7 +390,17 @@ namespace RedBadgeProject.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+
+                    using (var db = ApplicationDbContext.Create())
+
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel 
+                    { 
+                        
+                        Email = loginInfo.Email,
+                        BirthDate = DateTime.Now,
+                        MembershipTypes=db.MembershipTypes.Where(m=> !m.Name.ToLower().Equals(StaticDetails.AdminUserRole.ToLower())).ToList()
+                    
+                    });
             }
         }
 
@@ -398,6 +409,7 @@ namespace RedBadgeProject.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        //must add first name and last name, //get the name and split it
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
@@ -413,7 +425,10 @@ namespace RedBadgeProject.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var name = info.ExternalIdentity.Name.Split(' ');
+                var firstName = name[0].ToString();
+                var lastName = name[1].ToString();
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName=firstName, LastName=lastName, BirthDate=model.BirthDate, MembershipTypeId=model.MembershipTypeId, Disable=false };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

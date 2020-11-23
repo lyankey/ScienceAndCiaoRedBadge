@@ -55,14 +55,14 @@ namespace RedBadgeProject
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "370177410721089",
+               appSecret: "1a1c5f62151ea485c3e84f46e4c791b4");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
-            //    ClientId = "",
-            //    ClientSecret = ""
+            //    ClientId = "753742707508-dah4lpqn6gpus3deah5rsv7r6h0j3pb0.apps.googleusercontent.com",
+            //    ClientSecret = "0HGfwTRevL4tvY-qSEIM-Xds"
             //});
         }
     }
