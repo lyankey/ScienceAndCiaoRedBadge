@@ -15,7 +15,7 @@ namespace RedBadgeProject.Models
         public bool BrowserRemembered { get; set; }
         public ICollection<MembershipType> MembershipTypes { get; set; }
         [Required]
-        public int? MembershipTypeId { get; set; }
+        public int MembershipTypeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

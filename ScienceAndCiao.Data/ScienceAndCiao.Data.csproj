@@ -90,6 +90,10 @@
     <Compile Include="Migrations\202011222221363_madeMembershipTypeNullable.Designer.cs">
       <DependentUpon>202011222221363_madeMembershipTypeNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011231455392_RemovedNullableSymbols.cs" />
+    <Compile Include="Migrations\202011231455392_RemovedNullableSymbols.Designer.cs">
+      <DependentUpon>202011231455392_RemovedNullableSymbols.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rental.cs" />
@@ -122,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011222221363_madeMembershipTypeNullable.resx">
       <DependentUpon>202011222221363_madeMembershipTypeNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011231455392_RemovedNullableSymbols.resx">
+      <DependentUpon>202011231455392_RemovedNullableSymbols.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
