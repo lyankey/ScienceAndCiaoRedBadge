@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RedBadgeProject.Models;
+using ScienceAndCiao.Data;
 
 namespace RedBadgeProject.Controllers
 {
@@ -62,19 +63,89 @@ namespace RedBadgeProject.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
-
+            
             var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+
+            using (var db = ApplicationDbContext.Create())
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
+
+                var registeredUser = db.Users.First(u => u.Id.Equals(userId));
+
+                var model = new IndexViewModel
+                {
+                    HasPassword = HasPassword(),
+                    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                    Logins = await UserManager.GetLoginsAsync(userId),
+                    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                    BirthDate = registeredUser.BirthDate,
+                    Email = registeredUser.Email,
+                    Id = registeredUser.Id,
+                    FirstName = registeredUser.FirstName,
+                    LastName = registeredUser.LastName,
+                    MembershipTypeId = registeredUser.MembershipTypeId,
+                    MembershipTypes = db.MembershipTypes.ToList(),
+               
+                };
+                return View(model);
+            }
+        }
+
+  
+        //need to get the user, then change, then save changes - do not let them change membership type id
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(IndexViewModel model)
+        {
+            using (var db = ApplicationDbContext.Create())
+            {
+                if (ModelState.IsValid)
+                {
+                    var registeredUser = db.Users.First(u => u.Id.Equals(model.Id));
+                    registeredUser.FirstName = model.FirstName;
+                    registeredUser.LastName = model.LastName; 
+                    registeredUser.BirthDate = model.BirthDate;
+                    registeredUser.MembershipTypeId = model.MembershipTypeId;
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                //if model state is not valid....we have to send it back to the view because it needs to populate the dropdown again of the membership types - otherwise it will break because it will say there is a null value in membership types and it doesn't like that
+                else
+                {
+                    model.MembershipTypes = db.MembershipTypes.ToList();
+                }
+            }
+
             return View(model);
         }
 
+        public async Task<ActionResult> Edit()
+        {
+            var userId = User.Identity.GetUserId();
+
+            using (var db = ApplicationDbContext.Create())
+            {
+
+                var registeredUser = db.Users.First(u => u.Id.Equals(userId));
+
+                var model = new IndexViewModel
+                {
+                    HasPassword = HasPassword(),
+                    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                    Logins = await UserManager.GetLoginsAsync(userId),
+                    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                    BirthDate = registeredUser.BirthDate,
+                    Email = registeredUser.Email,
+                    Id = registeredUser.Id,
+                    FirstName = registeredUser.FirstName,
+                    LastName = registeredUser.LastName,
+                    MembershipTypeId = registeredUser.MembershipTypeId,
+                    MembershipTypes = db.MembershipTypes.ToList(),
+
+                };
+                return View(model);
+            }
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
