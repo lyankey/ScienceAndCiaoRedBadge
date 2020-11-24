@@ -49,8 +49,8 @@ namespace ScienceAndCiao.Services
                                     Id = e.Id,
                                     KitId = e.KitId,
                                     RentalPrice = e.RentalPrice,
-                                    StartDate = e.StartDate,
-                                    EndDate = e.EndDate,
+                                    //StartDate = e.StartDate,
+                                    //EndDate = e.EndDate,
                                 }
                         );
                 return query.ToArray();
@@ -71,8 +71,8 @@ namespace ScienceAndCiao.Services
                         Id = entity.Id,
                         KitId = entity.KitId,
                         RentalPrice = entity.RentalPrice,
-                        StartDate = entity.StartDate,
-                        EndDate = entity.EndDate,
+                        //StartDate = entity.StartDate,
+                        //EndDate = entity.EndDate,
                     };
             }
         }

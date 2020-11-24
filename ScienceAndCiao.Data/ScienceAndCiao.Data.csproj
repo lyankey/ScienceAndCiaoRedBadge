@@ -156,6 +156,14 @@
     <Compile Include="Migrations\202011231455392_RemovedNullableSymbols.Designer.cs">
       <DependentUpon>202011231455392_RemovedNullableSymbols.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011232005163_rentalModel.cs" />
+    <Compile Include="Migrations\202011232005163_rentalModel.Designer.cs">
+      <DependentUpon>202011232005163_rentalModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011232009568_changedRentalModel.cs" />
+    <Compile Include="Migrations\202011232009568_changedRentalModel.Designer.cs">
+      <DependentUpon>202011232009568_changedRentalModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rental.cs" />
@@ -191,6 +199,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011231455392_RemovedNullableSymbols.resx">
       <DependentUpon>202011231455392_RemovedNullableSymbols.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011232005163_rentalModel.resx">
+      <DependentUpon>202011232005163_rentalModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011232009568_changedRentalModel.resx">
+      <DependentUpon>202011232009568_changedRentalModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

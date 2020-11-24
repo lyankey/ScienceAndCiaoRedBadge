@@ -51,5 +51,6 @@ textarea {
 
 html {
     position: relative;
+/*keep footer at end*/
     min-height: 100%;
 }

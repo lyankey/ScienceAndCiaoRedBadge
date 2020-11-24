@@ -140,6 +140,7 @@ namespace RedBadgeProject.Controllers
         //
         // GET: /Account/Register
         //change to pass in view model for a new user
+        //change so customer can't sign up as admin - where clause
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -147,7 +148,8 @@ namespace RedBadgeProject.Controllers
             {
                 RegisterViewModel newUser = new RegisterViewModel
                 {
-                    MembershipTypes = db.MembershipTypes.ToList(),
+                    //get everything in db where name doesn't equal AdminUserRole
+                    MembershipTypes = db.MembershipTypes.Where(m=>!m.Name.ToLower().Equals(StaticDetails.AdminUserRole.ToLower())).ToList(),
                     BirthDate = DateTime.Now
                 };
                 return View(newUser);

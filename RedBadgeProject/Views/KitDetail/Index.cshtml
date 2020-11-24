@@ -1,0 +1,141 @@
+﻿@model RedBadgeProject.Models.RentalAndDetailsViewModel
+@using ScienceAndCiao.Models.User
+@using ScienceAndCiao.Services
+@{
+    ViewBag.Title = "Index";
+}
+@* making three columns, one for pic, one for description and title, and one for rental details *@
+
+
+@using (Html.BeginForm("Reserve", "BookRent"))
+
+{
+    @Html.AntiForgeryToken();
+
+    <div class="row">
+        @* Kit Image *@
+        <div class="col-sm-3 col-xs-4 image-kit">
+            <img class="thumbnail-img" src="@Model.ImageUrl" alt="" style="width:100%;height:auto;padding:10px;" />
+        </div>
+
+
+        @* Kit Details(Title/Grade/Description) *@
+        <div class="col-sm-6 col-xs-8 content-kit-main">
+            @* this allows the other two to take precedence if the space is small. html.raw is so stuff like br stays hidden *@
+            @* See the kitdetail style sheet for the styles for this *@
+            <div class="content-kit-title-grade">
+                <h2><b>@Model.Title</b></h2>
+                <h5>@Model.Grade</h5>
+            </div>
+            <div>
+
+                <br />
+                <span>@Html.Raw(Model.Description)</span>
+            </div><br />
+        </div>
+
+
+        @* Rental Price and other kit details *@
+        <div class="col-sm-3 col-xs-12 content-book-product-details">
+            <div>
+                @{ List<SelectListItem> listItem = new List<SelectListItem>();
+                    listItem.Add(new SelectListItem
+                    //calling static details avoids magic strings -- with these, the price shown matches the calucation in kitdetailcontroller
+                    {
+                        Text = StaticDetails.OneMonth,
+                        Value = StaticDetails.OneMonthCount
+                    });
+                    listItem.Add(new SelectListItem
+                    {
+                        Text = StaticDetails.SixMonth,
+                        Value = StaticDetails.SixMonthCount
+                    });
+                }
+
+                @if (Model.RentalPriceOneMonth != 0 && Model.RentalPriceSixMonth != 0)
+                {
+                    //User logged in and they are not admin
+
+                    <div class="form-control" style="height:350px;">
+                        <div class="input-group" style="height:30px">
+                            <label>Price Without Subscription</label>
+                            <label id="lblPublicPrice" style="font-weight:normal;">$@(Model.Price)</label><br />
+                        </div>
+                        @* horizontal line break after this section to separate *@
+                        <hr />
+
+                        <div id="divRegularPrice" class="input-group" style="height:90px;">
+                            <label>Rental Price : </label><br />
+                            <label id="lblOneMonth" style="font-weight:normal;">One Month : $@(Model.RentalPriceOneMonth)</label>
+                            <br />
+                            <label id="lblOneMonth" style="font-weight:normal;">Six Months : $@(Model.RentalPriceSixMonth)</label>
+                        </div>
+
+                        <br />
+                    </div>
+                }
+                else
+                {
+
+                    <div class="form-control" style="height:150px;">
+                        <div class="input-group" style="height:30px;">
+                            <label>MSRP:</label>
+                            <label id="lblMSRP" style="font-weight:normal;">$@(Model.Price)</label><br />
+                        </div>
+                        <hr />
+
+                        @if (User.IsInRole(StaticDetails.AdminUserRole))
+                        {
+                            //Admin user with Create button
+                            @Html.ActionLink("Create Rental", "Create", "RentController",
+                                      new { title = Model.Title }, new { @class = "btn btn-primary" }) 
+                        }
+                        else
+                        {
+                            //User not logged in
+                            <span>Login to unlock the discounted member price</span>
+                        }
+
+                    </div>
+                }
+            </div>
+
+            <h4 class="product-details-heading">Kit Details</h4>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.LengthInMinutes)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.LengthInMinutes)
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.PublicationDate)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.PublicationDate)
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.Grade)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Grade)
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.Price)
+                </dt>
+                <dd>
+                    &nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(m => m.Price)
+                </dd>
+            </dl>
+
+            @Html.HiddenFor(m => m.KitId)
+        </div>
+    </div>
+}
