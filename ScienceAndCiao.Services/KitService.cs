@@ -40,7 +40,7 @@ namespace ScienceAndCiao.Services
 
 
 
-        public IEnumerable<KitListItem> GetGames()
+        public IEnumerable<KitListItem> GetKits()
         {
             using (var ctx = new ApplicationDbContext())
             {

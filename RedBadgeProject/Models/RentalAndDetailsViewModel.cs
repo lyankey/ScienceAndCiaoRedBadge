@@ -13,6 +13,7 @@ namespace RedBadgeProject.Models
         //no requireds
         //user 
         public string UserId { get; set; }
+        public string Email { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: MMM dd yyy}")]
         [DisplayName("Date of Birth")]
@@ -67,8 +68,6 @@ namespace RedBadgeProject.Models
         [DisplayFormat(DataFormatString = "{0: MMM dd yyy}")]
         [DisplayName("Your rental began")]
         public DateTime? StartDate { get; set; }
-
-      
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: MMM dd yyy}")]
