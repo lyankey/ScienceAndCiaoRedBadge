@@ -24,7 +24,7 @@
             @*//add a javascript file in scripts to make the dropdown work - "AdminMenu"*@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Rental Status", "Index", "BookRent")</li>
+                    <li>@Html.ActionLink("Rental Status", "Index", "Rent")</li>
                     @if (User.IsInRole(StaticDetails.AdminUserRole))
                     {
             @Html.Partial("_AdminMenuPartial")}

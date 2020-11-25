@@ -8,11 +8,7 @@ using System.Threading.Tasks;
 
 namespace ScienceAndCiao.Data
 {
-    public enum StatusEnum
-    {
-        Rented,
-        Closed
-    }
+   
     public class Rental
     {
         [Key]
@@ -36,6 +32,11 @@ namespace ScienceAndCiao.Data
         [Required]
         public DateTime? EndDate { get; set; }
         public StatusEnum Status { get; set; }
+        public enum StatusEnum
+        {
+            Rented,
+            Closed
+        }
     }
 }
 

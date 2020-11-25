@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<RedBadgeProject.Models.RentalAndDetailsViewModel>
 @using ScienceAndCiao.Models.User
 @using ScienceAndCiao.Services
-@{
+
+
     ViewBag.Title = "Index";
 }
 @*//name and email should only be visible to admin user*@
@@ -60,7 +61,7 @@
             <th>
                 @Html.DisplayNameFor(m => m.First().StartDate)
             </th>
-        
+
             <th>
                 @Html.DisplayNameFor(m => m.First().RentalPrice)
             </th>
@@ -111,61 +112,57 @@
                           BranchId = null,
                           MembershipTypeId = null,
                           UserId = null,
-                          RentalId = item.Id
+                          RentalId = item.RentalId
                       })
                 </td>
                 @* Action buttons *@
                 <td>
-                    @if (item.Status.ToString().ToLower().Equals(StaticDetails.RequestedLower) && User.IsInRole(StaticDetails.AdminUserRole))
+                    @if (item.Status.ToString().ToLower().Equals(StaticDetails.ClosedLower) && User.IsInRole(StaticDetails.AdminUserRole))
                     {
-
-                        if ((item.Status.ToString().ToLower().Equals(StaticDetails.RequestedLower) && (User.IsInRole(StaticDetails.EndUserRole))) ||
-                            (User.IsInRole(StaticDetails.AdminUserRole) && !item.Status.ToString().ToLower().Equals(StaticDetails.ClosedLower)))
+                        //Show Delete Button
+                        //If Status is Requested for Customers, show them delete button
+                        //If User is admin and status is not closed then show admin delete button
+                        @Html.Partial("_IndivButtonPartial", new IndivButtonPartial
                         {
-                            //Show Delete Button
-                            //If Status is Requested for Customers, show them delete button
-                            //If User is admin and status is not closed then show admin delete button
+                           Action = "Delete",
+                           ButtonType = "btn-danger",
+                           Glyph = "trash",
+                           Text = "Delete Button",
+                           KitId = null,
+                           CustomerId = null,
+                           BranchId = null,
+                           MembershipTypeId = null,
+                           UserId = null,
+                           RentalId = item.RentalId
+                        }) }
+
+
+                    else
+                    {
+                        if (item.Status.ToString().ToLower().Equals(StaticDetails.RentedLower))
+                        {
+                            //Display Return Button
                             @Html.Partial("_IndivButtonPartial", new IndivButtonPartial
                             {
-                               Action = "Delete",
-                               ButtonType = "btn-danger",
-                               Glyph = "trash",
-                               Text = "Delete Button",
+                               Action = "Return",
+                               ButtonType = "btn-primary",
+                               Glyph = "retweet",
+                               Text = "Return Button",
                                KitId = null,
                                CustomerId = null,
                                BranchId = null,
                                MembershipTypeId = null,
                                UserId = null,
-                               RentalId = item.Id
-                            }) }
-
-        
-                        else
-                        {
-                            if (item.Status.ToString().ToLower().Equals(StaticDetails.RentedLower) && User.IsInRole(StaticDetails.AdminUserRole))
-                            {
-                                //Display Return Button
-                                @Html.Partial("_IndivButtonPartial", new IndivButtonPartial
-                                {
-                                   Action = "Return",
-                                   ButtonType = "btn-primary",
-                                   Glyph = "retweet",
-                                   Text = "Return Button",
-                                   KitId = null,
-                                   CustomerId = null,
-                                   BranchId = null,
-                                   MembershipTypeId = null,
-                                   UserId = null,
-                                   RentalId = item.Id
-                                })}
-                        }
+                               RentalId = item.RentalId
+                            })}
+                    }
                     }
 
 
 
                 </td>
             </tr>
-}
+        }
     </table>
 
     @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber }))}

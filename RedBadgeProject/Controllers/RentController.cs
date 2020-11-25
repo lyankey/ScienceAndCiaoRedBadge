@@ -127,7 +127,7 @@ namespace RedBadgeProject.Controllers
                             UserId = u.Id
 
                         };
-            ////only admin should be able to see all the book rentals. users!admin should see only their rentals
+            ////only admin should be able to see all the rentals. users!admin should see only their rentals
             //if (option == "email" && search.Length > 0)
             //{
             //    model = model.Where(u => u.Email.Contains(search));
@@ -151,7 +151,7 @@ namespace RedBadgeProject.Controllers
 
 
         [HttpPost]
-        public ActionResult Reserve(RentalAndDetailsViewModel kit)
+        public ActionResult Rent(RentalAndDetailsViewModel kit)
         {
             var userid = User.Identity.GetUserId();
             Kit kitToRent = db.Kits.Find(kit.KitId);
@@ -180,6 +180,7 @@ namespace RedBadgeProject.Controllers
                     UserId = userid,
                     Duration = kit.Duration,
                     RentalPrice = rentalPrice,
+                    Status = Rental.StatusEnum.Rented
 
                 };
 
@@ -187,7 +188,7 @@ namespace RedBadgeProject.Controllers
                 var kitInDb = db.Kits.SingleOrDefault(c => c.KitId == kit.KitId);
 
                 db.SaveChanges();
-                return RedirectToAction("Index", "BookRent");
+                return RedirectToAction("Index", "Rent");
             }
             return View();
         }
@@ -245,7 +246,7 @@ namespace RedBadgeProject.Controllers
                 Rental rental = db.Rentals.Find(model.RentalId);
                 Kit kitInDb = db.Kits.Find(rental.KitId);
 
-                var userInDb = db.Users.Single(u => u.Id == rental.UserId);
+                var registeredUser = db.Users.Single(u => u.Id == rental.UserId);
  
                 db.SaveChanges();
             }
@@ -286,8 +287,8 @@ namespace RedBadgeProject.Controllers
                 Rental rental = db.Rentals.Find(Id);
                 db.Rentals.Remove(rental);
 
-                var bookInDb = db.Kits.Where(b => b.KitId.Equals(rental.KitId)).FirstOrDefault();
-                var userInDb = db.Users.SingleOrDefault(c => c.Id == rental.UserId);
+                var kitInDb = db.Kits.Where(b => b.KitId.Equals(rental.KitId)).FirstOrDefault();
+                var registeredUser = db.Users.SingleOrDefault(c => c.Id == rental.UserId);
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
