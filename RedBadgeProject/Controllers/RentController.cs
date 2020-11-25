@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace RedBadgeProject.Controllers
 {
@@ -94,8 +95,8 @@ namespace RedBadgeProject.Controllers
         //get the rental id, the kit id, the user id - join them, pass to a new rental view
         //joining all the tables, selecting a rental view object, return that object to the view (after filtering by user) 
         //the view has to be an IEnumerable of the model because we are converting the the list and returning that
-
-        public ActionResult Index()
+        //the pageNumber is what we are passing to the Index view
+        public ActionResult Index(int? pageNumber)
         {
             string userid = User.Identity.GetUserId();
 
@@ -140,8 +141,8 @@ namespace RedBadgeProject.Controllers
             {
                 model = model.Where(u => u.UserId.Equals(userid));
             }
-
-            return View(model.ToList());
+            //means for each 1 page, display 5 rows
+            return View(model.ToList().ToPagedList(pageNumber?? 1,5));
         }
 
 

@@ -1,12 +1,15 @@
-﻿@model IEnumerable<RedBadgeProject.Models.RentalAndDetailsViewModel>
+﻿@model IPagedList<RedBadgeProject.Models.RentalAndDetailsViewModel>
+@using PagedList
+@using PagedList.Mvc
 @using ScienceAndCiao.Models.User
 @using ScienceAndCiao.Services
+
 
 
     ViewBag.Title = "Index";
 }
 @*//name and email should only be visible to admin user*@
-@using (Html.BeginForm("Index", "BookRent", FormMethod.Get))
+@using (Html.BeginForm("Index", "Rent", FormMethod.Get))
 {
     <br />
     <div class="row">
@@ -164,6 +167,7 @@
             </tr>
         }
     </table>
-
-    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber }))}
+    //this sends to the paged list, and had to add to the using statement at the top, now add to rent controller after this
+    @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber }))
+}
 
