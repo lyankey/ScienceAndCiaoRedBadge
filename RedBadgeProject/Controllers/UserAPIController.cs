@@ -19,7 +19,8 @@ namespace RedBadgeProject.Controllers
         //Get Email or (Name and birthdate) to autopopulate
         public IHttpActionResult Get(string type, string query = null)
         {
-            //get based on email match
+            //get based on email match - see the javascript in the Create rental - whatever we put in the email box is passed to the API
+            //minlength in the UserController means typeahead kicks in after 3 characters
             if (type.Equals("email") && query != null)
             {
                 var formCustomerQuery = db.Users.Where(u => u.Email.ToLower().Contains(query.ToLower()));

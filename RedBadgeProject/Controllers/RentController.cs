@@ -90,8 +90,12 @@ namespace RedBadgeProject.Controllers
             return View();
         }
 
-        // GET: BookRent
-        public ActionResult Index(int? pageNumber, string option = null, string search = null)
+        // GET: Rent
+        //get the rental id, the kit id, the user id - join them, pass to a new rental view
+        //joining all the tables, selecting a rental view object, return that object to the view (after filtering by user) 
+        //the view has to be an IEnumerable of the model because we are converting the the list and returning that
+
+        public ActionResult Index()
         {
             string userid = User.Identity.GetUserId();
 
@@ -123,21 +127,21 @@ namespace RedBadgeProject.Controllers
                             UserId = u.Id
 
                         };
-
-            if (option == "email" && search.Length > 0)
-            {
-                model = model.Where(u => u.Email.Contains(search));
-            }
-            if (option == "name" && search.Length > 0)
-            {
-                model = model.Where(u => u.FirstName.Contains(search) || u.LastName.Contains(search));
-            }
+            ////only admin should be able to see all the book rentals. users!admin should see only their rentals
+            //if (option == "email" && search.Length > 0)
+            //{
+            //    model = model.Where(u => u.Email.Contains(search));
+            //}
+            //if (option == "name" && search.Length > 0)
+            //{
+            //    model = model.Where(u => u.FirstName.Contains(search) || u.LastName.Contains(search));
+            //}
             if (!User.IsInRole(StaticDetails.AdminUserRole))
             {
                 model = model.Where(u => u.UserId.Equals(userid));
             }
 
-            return View(model.ToList().ToPagedList(pageNumber ?? 1, 5));
+            return View(model.ToList());
         }
 
 

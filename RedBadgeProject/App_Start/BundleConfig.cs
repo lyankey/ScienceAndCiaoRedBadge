@@ -22,12 +22,14 @@ namespace RedBadgeProject
             bundles.Add(new ScriptBundle("~/bundles/kitRentalJs").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
+                       "~/Scripts/typeahead.bundle.min",
                         "~/Scripts/AdminMenu.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-theme.css",
                        "~/Content/KitDetail.css",
                       "~/Content/thumbnail.css",
+                        "~/Content/typeahead.css",
                       "~/Content/site.css"));
         }
     }
