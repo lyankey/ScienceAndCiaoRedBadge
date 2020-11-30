@@ -107,8 +107,8 @@
                     @Html.Partial("_IndivButtonPartial", new IndivButtonPartial
                       {
                           Action = "Details",
-                          ButtonType = "btn-success",
-                          Glyph = "list",
+                          ButtonType = "btn-primary",
+                          Glyph = "ok",
                           Text = "Details Button",
                           KitId = null,
                           CustomerId = null,
@@ -122,9 +122,8 @@
                 <td>
                     @if (item.Status.ToString().ToLower().Equals(StaticDetails.ClosedLower) && User.IsInRole(StaticDetails.AdminUserRole))
                     {
-                        //Show Delete Button
-                        //If Status is Requested for Customers, show them delete button
-                        //If User is admin and status is not closed then show admin delete button
+                        //Show Delete Button               
+                        //If User is admin and status is  closed then show admin delete button
                         @Html.Partial("_IndivButtonPartial", new IndivButtonPartial
                         {
                            Action = "Delete",
@@ -144,7 +143,7 @@
                     {
                         if (item.Status.ToString().ToLower().Equals(StaticDetails.RentedLower))
                         {
-                            //Display Return Button
+                            //Display Return Button if the item is in Rented status
                             @Html.Partial("_IndivButtonPartial", new IndivButtonPartial
                             {
                                Action = "Return",

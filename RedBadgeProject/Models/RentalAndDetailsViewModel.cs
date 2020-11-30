@@ -1,4 +1,5 @@
 ﻿using ScienceAndCiao.Data;
+using ScienceAndCiao.Models.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,7 +76,23 @@ namespace RedBadgeProject.Models
         [DisplayName("Your rental will end")]
         public DateTime? EndDate { get; set; }
         public string Duration { get; set; }
-        public StatusEnum Status { get; set; }
+        public String Status { get; set; }
+        public string actionName
+        {
+            get
+            {
+                if (Status.ToLower().Contains(StaticDetails.RentedLower))
+                {
+                    return "Return";
+                }
+                //if (Status.ToLower().Contains(StaticDetails.ClosedLower))
+                //{
+                //    return "Closed";
+                //}
 
-    };
-}
+                return null;
+            }
+
+        }
+    }
+};

@@ -27,7 +27,7 @@ namespace ScienceAndCiao.Data
         [Required]
         public DateTime? StartDate { get; set; }
         [Required]
-        public string Duration { get; set; }
+        public DateTime? Duration { get; set; }
 
         [Required]
         public DateTime? EndDate { get; set; }
